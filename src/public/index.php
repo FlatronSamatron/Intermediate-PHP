@@ -1,24 +1,14 @@
 <?php
 
 require_once '../Transaction.php';
+require_once '../Customer.php';
+require_once '../PaymentProfile.php';
 
-$amount1 = (new Transaction(110, 'Transaction 1'))
-    ->addTax(10)
-    ->applyDiscount(25)
-    ->getAmount();
+$transaction = new Transaction(120, 'Transaction 1');
 
-$amount2 = (new Transaction(200, 'Transaction 2'))
-    ->addTax(10)
-    ->applyDiscount(15)
-    ->getAmount();
+//$transaction->customer = new Customer();
+//
+//echo $transaction->customer?->paymentProfile?->id ?? 'foo'; //Nullsafe Operator
 
-var_dump($amount1);
-echo '<hr/>';
-var_dump($amount2);
-echo '<hr/>';
-
-$str = '{"a": 1, "b": 1, "c": 1}';
-$str_decode = json_decode($str); //object(stdClass)#1 (3) { ["a"]=> int(1) ["b"]=> int(1) ["c"]=> int(1) }
-var_dump($str_decode);
-var_dump($str_decode->a);
+echo $transaction->getCustomer()?->getPaymentProfile()?->id ?? 'foo'; //Nullsafe Operator
 
