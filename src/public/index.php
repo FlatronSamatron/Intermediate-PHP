@@ -1,14 +1,15 @@
 <?php
 
-require_once '../Transaction.php';
-require_once '../Customer.php';
-require_once '../PaymentProfile.php';
+require_once '../PaymentGateway/Stripe/Transaction.php';
+require_once '../PaymentGateway/Paddle/Transaction.php';
+require_once '../PaymentGateway/Paddle/CustomerProfile.php';
 
-$transaction = new Transaction(120, 'Transaction 1');
+use PaymentGateway\Stripe\Transaction as StripeTransaction;
+use PaymentGateway\Paddle\{Transaction as PaddleTransaction, CustomerProfile};
 
-//$transaction->customer = new Customer();
-//
-//echo $transaction->customer?->paymentProfile?->id ?? 'foo'; //Nullsafe Operator
-
-echo $transaction->getCustomer()?->getPaymentProfile()?->id ?? 'foo'; //Nullsafe Operator
+var_dump(new StripeTransaction());
+echo '<hr/>';
+var_dump(new PaddleTransaction());
+echo '<hr/>';
+var_dump(new CustomerProfile());
 
