@@ -5,29 +5,20 @@
 //require_once '../app/PaymentGateway/Paddle/CustomerProfile.php';
 //require_once '../app/Notification/Email.php';
 
-use App\PaymentGateway\Paddle\{CustomerProfile};
-use App\PaymentGateway\Paddle\Transaction as PaddleTransaction;
-use App\PaymentGateway\Stripe\Transaction as StripeTransaction;
-use App\Notification\Email;
-
-//spl_autoload_register(function($class) {
-//    $path = __DIR__ . '/../' . lcfirst(str_replace('\\', '/', $class). '.php');
-//    if(file_exists($path)){
-//        require $path;
-//    }
-//});
+use App\Enums\Status;
+use App\PaymentGateway\Stripe\Transaction;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-var_dump(new StripeTransaction());
-echo '<hr/>';
-var_dump(new PaddleTransaction());
-echo '<hr/>';
-var_dump(new CustomerProfile());
-echo '<hr/>';
-var_dump(new Email());
-echo '<hr/>';
+$transaction = new Transaction();
+$transaction->setStatus(Status::PAID);
+var_dump($transaction->getStatus());
 
-$id = new \Ramsey\Uuid\UuidFactory();
-echo $id->uuid4();
+//echo $transaction::STATUS_PAID;
+//echo '<hr/>';
+//echo $transaction::STATUS_DECLINED;
+//echo '<hr/>';
+//echo $transaction::STATUS_PENDING;
+echo '<hr/>';
+echo Transaction::class;
 
