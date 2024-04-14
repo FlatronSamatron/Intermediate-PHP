@@ -1,24 +1,25 @@
 <?php
 
-//require_once '../app/PaymentGateway/Stripe/Transaction.php';
-//require_once '../app/PaymentGateway/Paddle/Transaction.php';
-//require_once '../app/PaymentGateway/Paddle/CustomerProfile.php';
-//require_once '../app/Notification/Email.php';
-
-use App\Enums\Status;
 use App\PaymentGateway\Stripe\Transaction;
+use App\DB;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$transaction = new Transaction();
-$transaction->setStatus(Status::PAID);
-var_dump($transaction->getStatus());
+$transaction = new Transaction(25,'Transaction1');
+$transaction = new Transaction(25,'Transaction2');
+$transaction = new Transaction(25,'Transaction3');
+$transaction = new Transaction(25,'Transaction4');
 
-//echo $transaction::STATUS_PAID;
-//echo '<hr/>';
-//echo $transaction::STATUS_DECLINED;
-//echo '<hr/>';
-//echo $transaction::STATUS_PENDING;
+var_dump(Transaction::getCount());
+echo '<hr/>';
+
+//singleton
+$db = DB::getInstance(['ha' => 'haha']);
+$db = DB::getInstance(['ha' => 'haha']);
+$db = DB::getInstance(['ha' => 'haha']);
+$db = DB::getInstance(['ha' => 'haha']);
+var_dump($db);
+
 echo '<hr/>';
 echo Transaction::class;
 
