@@ -4,23 +4,16 @@ use App\PaymentGateway\Stripe\Transaction;
 
 require __DIR__.'/../vendor/autoload.php';
 
-use App\{Toaster, ToasterPro};
+$fields = [
+        new \App\Text('textField'),
+        new \App\Checkbox('checkboxField'),
+        new \App\Radio('radioField'),
+];
 
-$toaster = new Toaster();
-$toaster->addSlice('bread');
-$toaster->addSlice('bread');
-$toaster->addSlice('bread');
-$toaster->toast();
-echo '<hr/>';
+foreach ($fields as $field) {
+    echo $field->render().'<br/>';
+}
 
-$toasterPro = new ToasterPro();
-$toasterPro->addSlice('bread');
-$toasterPro->addSlice('bread');
-$toasterPro->addSlice('bread');
-$toasterPro->addSlice('bread');
-$toasterPro->addSlice('bread');
-$toasterPro->toast();
-$toasterPro->toastBagel();
 
 echo '<hr/>';
 echo Transaction::class;
