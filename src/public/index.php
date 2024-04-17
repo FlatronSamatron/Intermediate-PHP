@@ -4,16 +4,10 @@ use App\PaymentGateway\Stripe\Transaction;
 
 require __DIR__.'/../vendor/autoload.php';
 
-$fields = [
-        new \App\Text('textField'),
-        new \App\Checkbox('checkboxField'),
-        new \App\Radio('radioField'),
-];
-
-foreach ($fields as $field) {
-    echo $field->render().'<br/>';
-}
-
+$service = new \App\DebtCollectionService();
+$service->collectionDebt(new \App\CollectionAgency());
+echo '<hr/>';
+$service->collectionDebt(new \App\Rocky());
 
 echo '<hr/>';
 echo Transaction::class;
