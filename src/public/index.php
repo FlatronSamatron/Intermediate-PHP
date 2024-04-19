@@ -4,23 +4,22 @@ use App\PaymentGateway\Stripe\Transaction;
 
 require __DIR__.'/../vendor/autoload.php';
 
-use App\Invoice;
+use App\{ClassA, ClassB};
 
-$invoice = new Invoice();
-var_dump($invoice);
+$classA = new ClassA();
+$classB = new ClassB();
 
-//$invoice(); //__invoke
-//echo $invoice //__toString;
-
-//$invoice->process(15, 'some description'); //__call
+//var_dump($classA->getName());
 //echo '<hr/>';
-//App\Invoice::process(1, 2, 3);
-//$invoice->ammount = 50;
-//
-//var_dump(isset($invoice->ammount));
-//unset($invoice->ammount);
-//var_dump(isset($invoice->ammount));
+//var_dump($classB->getName());
 
+var_dump(ClassA::getName());
+echo '<hr/>';
+var_dump(ClassB::getName());
+echo '<hr/>';
+var_dump(ClassA::make());
+echo '<hr/>';
+var_dump(ClassB::make());
 echo '<hr/>';
 echo Transaction::class;
 
