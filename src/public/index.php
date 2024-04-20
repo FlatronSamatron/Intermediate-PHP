@@ -1,34 +1,21 @@
 <?php
 
+use App\classA;
 use App\PaymentGateway\Stripe\Transaction;
 
 require __DIR__.'/../vendor/autoload.php';
 
-use App\{CoffeeMaker, CappuccinoMaker, LatteMaker, AllInOneCoffeeMaker};
+$obj = new class(1, 2, 3) {
+    public function __construct(public int $x, public int $y, public int $z)
+    {
+    }
+};
 
-$coffeeMaker = new CoffeeMaker();
-$coffeeMaker->makeCoffee();
-echo '<hr/>';
+$objA = new classA(5, 5);
 
-$latteMaker = new LatteMaker();
-$latteMaker->makeCoffee();
-echo '<br/>';
-$latteMaker->makeLatte();
-echo '<hr/>';
-
-$cappuccinoMaker = new CappuccinoMaker();
-$cappuccinoMaker->makeCoffee();
-echo '<br/>';
-$cappuccinoMaker->makeCappuccino();
-echo '<hr/>';
-
-$allInOneCoffeeMaker = new AllInOneCoffeeMaker();
-$allInOneCoffeeMaker->makeCoffee();
-echo '<br/>';
-$allInOneCoffeeMaker->makeCappuccino();
-echo '<br/>';
-$allInOneCoffeeMaker->makeLatte();
-echo '<hr/>';
+echo '<pre/>';
+var_dump(get_class($obj), $obj, $objA->bar());
+echo '<pre/>';
 
 echo '<hr/>';
 echo Transaction::class;
