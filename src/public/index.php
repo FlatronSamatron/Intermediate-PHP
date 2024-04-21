@@ -1,22 +1,27 @@
 <?php
 
-use App\classA;
-use App\PaymentGateway\Stripe\Transaction;
+use App\CustomInvoice;
+use App\Invoice;
 
 require __DIR__.'/../vendor/autoload.php';
 
-$obj = new class(1, 2, 3) {
-    public function __construct(public int $x, public int $y, public int $z)
-    {
-    }
-};
+$invoice1      = new Invoice(25, 'My Invoice');
+$invoice2      = new Invoice(25, 'My Invoice');
+$invoice3      = $invoice2;
+$customInvoice = new CustomInvoice(25, 'My Invoice');
 
-$objA = new classA(5, 5);
-
-echo '<pre/>';
-var_dump(get_class($obj), $obj, $objA->bar());
-echo '<pre/>';
-
+echo '$invoice1 == $invoice2 ';
+var_dump($invoice1 == $invoice2);
 echo '<hr/>';
-echo Transaction::class;
+echo '$invoice1 === $invoice2 ';
+var_dump($invoice1 === $invoice2);
+echo '<hr/>';
+echo '$invoice2 === $invoice3 ';
+var_dump($invoice2 === $invoice3);
+echo '<hr/>';
+echo '$invoice1 == $customInvoice ';
+var_dump($customInvoice == $invoice1);
+echo '<hr/>';
+echo '$invoice1 === $customInvoice ';
+var_dump($customInvoice === $invoice1);
 
