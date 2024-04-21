@@ -7,18 +7,40 @@ class Invoice
 {
     private string $id;
 
-    public function __construct()
-    {
+    public function __construct(
+            public float $amount,
+            public string $description,
+            public string $creditCardNumber
+    ) {
         $this->id = uniqid('invoice_');
     }
 
-    public static function create(): static
+    public function __sleep(): array
     {
-        return new static();
+        return ['id', 'amount'];
     }
 
-    public function __clone(): void
+    public function __wakeup(): void
     {
-        $this->id = uniqid('invoice_');
+        // TODO: Implement __wakeup() method.
+    }
+
+    public function __serialize(): array
+    {
+        return [
+                'id'               => $this->id,
+                'amount'           => $this->amount,
+                'description'      => $this->description,
+                'creditCardNumber' => base64_encode($this->creditCardNumber),
+                'foo'              => 'bar',
+        ];
+    }
+
+    public function __unserialize(array $data): void
+    {
+        $this->id               = $data['id'];
+        $this->amount           = $data['amount'];
+        $this->description      = $data['description'];
+        $this->creditCardNumber = base64_decode($data['id']);
     }
 }
