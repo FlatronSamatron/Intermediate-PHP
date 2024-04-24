@@ -2,26 +2,20 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-$invoice = new \App\Invoice(5, 'Invoice 1', '123456789');
-$str     = serialize($invoice);
-echo '<pre>';
-var_dump($str);
-echo '<pre/>';
+use App\{Invoice, Customer};
 
-echo '<pre>';
-var_dump(unserialize($str));
-echo '<pre/>';
-//echo serialize($invoice);
-//echo '<hr/>';
-//echo serialize(true);
-//echo '<hr/>';
-//echo serialize(1);
-//echo '<hr/>';
-//echo serialize(1.5);
-//echo '<hr/>';
-//echo serialize('hello');
-//echo '<hr/>';
-//echo serialize([]);
+$invoice = new Invoice(new Customer(['transaction1' => '50']));
+
+try {
+    $invoice->process(-25);
+} catch (\App\Exception\MissingBillingInfoException $e) {
+    echo $e->getMessage().' '.$e->getFile().' '.$e->getLine();
+} catch (\InvalidArgumentException) {
+    echo 'Invalid argument exception';
+} finally {
+    echo '<br/>';
+    echo 'Finally block';
+}
 
 echo '<hr/>';
 
