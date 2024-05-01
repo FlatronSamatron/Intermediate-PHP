@@ -1,20 +1,18 @@
 <?php
 
-use App\{InvoiceCollection, Invoice};
+use App\Router;
 
 require __DIR__.'/../vendor/autoload.php';
 
-foreach (new Invoice(25) as $key => $value) {
-    echo $key.' = '.$value.'<br/>';
-}
+//echo '<pre>';
+//var_dump($_SERVER);
+//echo '<hr/>';
 
-echo '<hr/>';
+$router = new Router();
 
-$invoiceCollection = new InvoiceCollection([new Invoice(15), new Invoice(25), new Invoice(50)]);
+$router
+        ->register('/', [\App\Classes\Home::class, 'index'])
+        ->register('/invoices', [\App\Classes\Invoice::class, 'index'])
+        ->register('/invoices/create', [\App\Classes\Invoice::class, 'create']);
 
-foreach ($invoiceCollection as $invoice) {
-//    echo '<pre>';
-//    var_dump($invoice);
-//    echo '<hr/>';
-    echo $invoice->id.' - '.$invoice->amount.'<hr/>';
-}
+echo $router->resolve($_SERVER['REQUEST_URI']);
