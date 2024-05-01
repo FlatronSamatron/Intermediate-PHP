@@ -4,10 +4,6 @@ use App\Router;
 
 require __DIR__.'/../vendor/autoload.php';
 
-//echo '<pre>';
-//var_dump($_SERVER);
-//echo '<hr/>';
-
 $router = new Router();
 
 $router
