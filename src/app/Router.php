@@ -9,21 +9,21 @@ class Router
 {
     private array $routes;
 
-    public function __construct()
+    public function register(string $requestMethod, string $route, callable|array $action): self
     {
-    }
-
-    public function register(string $route, callable|array $action): self
-    {
-        $this->routes[$route] = $action;
+        $this->routes[$requestMethod][$route] = $action;
 
         return $this;
     }
 
-    public function resolve(string $requestUri)
+    public function resolve(string $requestUri, string $requestMethod)
     {
         $route  = explode('?', $requestUri)[0];
-        $action = $this->routes[$route] ?? null;
+        $action = $this->routes[$requestMethod][$route] ?? null;
+
+//        echo '<pre>';
+//        var_dump($this->routes[$requestMethod], $route);
+//        echo '</pre>';
 
         if (!$action) {
             throw new RouteNotFoundException();
@@ -44,5 +44,19 @@ class Router
                 }
             }
         }
+    }
+
+    public function get(string $route, callable|array $action): self
+    {
+        $this->register('GET', $route, $action);
+
+        return $this;
+    }
+
+    public function post(string $route, callable|array $action): self
+    {
+        $this->register('POST', $route, $action);
+
+        return $this;
     }
 }
