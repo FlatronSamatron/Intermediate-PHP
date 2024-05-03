@@ -9,15 +9,16 @@ require __DIR__.'/../vendor/autoload.php';
 //echo '<hr/>';
 
 const STORAGE_PATH = __DIR__.'/../storage';
+const VIEW_PATH    = __DIR__.'/../views';
 
 $router = new Router();
 
 $router
-        ->get('/', [\App\Classes\Home::class, 'index'])
-        ->post('/upload', [\App\Classes\Home::class, 'upload'])
-        ->get('/invoices', [\App\Classes\Invoice::class, 'index'])
-        ->get('/invoices/create', [\App\Classes\Invoice::class, 'create'])
-        ->post('/invoices/create', [\App\Classes\Invoice::class, 'store']);
+        ->get('/', [\App\Controllers\HomeController::class, 'index'])
+        ->post('/upload', [\App\Controllers\HomeController::class, 'upload'])
+        ->get('/invoices', [\App\Controllers\InvoiceController::class, 'index'])
+        ->get('/invoices/create', [\App\Controllers\InvoiceController::class, 'create'])
+        ->post('/invoices/create', [\App\Controllers\InvoiceController::class, 'store']);
 
 echo $router->resolve(
         $_SERVER['REQUEST_URI'],
