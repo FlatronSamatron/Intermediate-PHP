@@ -695,7 +695,7 @@
 
 ---
 
-- [HTTP Headers In PHP - Request & Response Headers](https://www.youtube.com/watch?v=W7tj0Qlk3rE)
+- [2.28 - HTTP Headers In PHP - Request & Response Headers](https://www.youtube.com/watch?v=W7tj0Qlk3rE)
 
     - HTTP - это протокол для общения между клиентом (браузером) и сервером. Он использует запросы и ответы со
       стандартным форматом сообщения.
@@ -721,3 +721,53 @@
       заголовков. Существующие PHP-пакеты предоставляют это.
 
     - ### В видео основное внимание уделяется ключевым концепциям HTTP, таким как формат запроса/ответа, общие заголовки и коды состояния, а также тому, как PHP может отправлять заголовки и обрабатывать ошибки/перенаправления.
+
+---
+
+- [2.29 - Intro to MySQL](https://www.youtube.com/watch?v=mSnte-Ovm10)
+
+    - MySQL - это реляционная система управления базами данных, которая часто используется с веб-приложениями PHP для
+      хранения и извлечения данных.
+
+    - Для локальной разработки используется Docker для запуска контейнера MySQL. Таблицы, данные и пользователи могут
+      управляться через командную строку MySQL, MySQL Workbench или аналогичные инструменты.
+
+    - Рассматриваются основы MySQL, включая создание таблиц, вставку/обновление/удаление данных и отбор данных с помощью
+      выражений WHERE, ORDER BY, LIMIT и др.
+
+    - Объясняются типы данных как INT, VARCHAR, DATETIME. Также затрагиваются первичные ключи, автоинкрементные ID,
+      индексы.
+
+    - Определяются взаимосвязи между таблицами с помощью внешних ключей. Создается таблица invoices с внешним ключом,
+      связывающим user_id с таблицей users.
+
+    - Демонстрируется использование JOIN для извлечения данных из связанных таблиц, избегая двусмысленности столбцов за
+      счет предварения таблицами.
+
+    - ### Видео знакомит зрителя с основами MySQL перед подключением ее к PHP в дальнейших видео для построения и запросов базы данных полного приложения. Рассматриваются, но не детально более продвинутые темы.
+    - docker-compose up -d --build
+
+```
+USE my_db;
+
+CREATE TABLE users (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	email VARCHAR(255) UNIQUE NOT NULL,
+	full_name VARCHAR(255) NOT NULL,
+	is_active BOOLEAN DEFAULT 0 NOT NULL,
+	created_at DATETIME NOT NULL,
+	KEY `is_active`(`is_active`)
+)
+```
+
+```
+USE my_db;
+
+CREATE TABLE invoices (
+	id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+	amount DECIMAL(10, 4),
+	user_id INT UNSIGNED,
+	FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL ON UPDATE CASCADE 
+)
+
+```
