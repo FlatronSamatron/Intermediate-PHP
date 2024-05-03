@@ -25,5 +25,7 @@ class HomeController
         echo '</pre>';
 
         move_uploaded_file($_FILES['receipt']['tmp_name'], $filePath);
+
+        header('Location : /');
     }
 }
