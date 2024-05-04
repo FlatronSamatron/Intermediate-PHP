@@ -31,7 +31,7 @@ class HomeController
 
             $stmt->execute();
 
-//            $id = (int)$db->lastInsertId();
+            $id = (int)$db->lastInsertId();
 
             foreach ($db->query('select * from users')->fetchAll() as $user) {
                 echo '<pre>';
