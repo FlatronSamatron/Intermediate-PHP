@@ -29,11 +29,9 @@ class HomeController
             $stmt->bindValue(':date1', $createdAt);
             $stmt->bindValue(':date2', $createdAt);
 
-//            echo $stmt;
-
             $stmt->execute();
 
-            $id = (int)$db->lastInsertId();
+//            $id = (int)$db->lastInsertId();
 
             foreach ($db->query('select * from users')->fetchAll() as $user) {
                 echo '<pre>';
