@@ -8,6 +8,9 @@ require __DIR__.'/../vendor/autoload.php';
 //var_dump($_SERVER);
 //echo '<hr/>';
 
+$dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
 const STORAGE_PATH = __DIR__.'/../storage';
 const VIEW_PATH    = __DIR__.'/../views';
 
