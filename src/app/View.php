@@ -11,7 +11,7 @@ class View
     {
     }
 
-    public static function make(string $string, array $params = [])
+    public static function make(string $string, array $params = []): static
     {
         return new static($string, $params);
     }
