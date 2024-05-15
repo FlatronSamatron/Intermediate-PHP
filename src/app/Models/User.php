@@ -17,4 +17,15 @@ class User extends Model
 
         return (int)$this->db->lastInsertId();
     }
+
+    public function getUser(string $email): array
+    {
+        $stmt = $this->db->prepare(
+                'select * from users where email = ?'
+        );
+
+        $stmt->execute([$email]);
+
+        return $stmt->fetch();
+    }
 }

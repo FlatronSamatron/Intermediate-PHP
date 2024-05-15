@@ -1,8 +1,6 @@
 <?php
 
-use App\App;
-use App\Config;
-use App\Router;
+use App\{App, Container, Config, Router, Controllers};
 
 require __DIR__.'/../vendor/autoload.php';
 
@@ -12,14 +10,16 @@ $dotenv->load();
 const STORAGE_PATH = __DIR__.'/../storage';
 const VIEW_PATH    = __DIR__.'/../views';
 
-$router = new Router();
+$container = new Container();
+
+$router = new Router($container);
 
 $router
-        ->get('/', [\App\Controllers\HomeController::class, 'index'])
-        ->post('/upload', [\App\Controllers\HomeController::class, 'upload'])
-        ->get('/invoices', [\App\Controllers\InvoiceController::class, 'index'])
-        ->get('/invoices/create', [\App\Controllers\InvoiceController::class, 'create'])
-        ->post('/invoices/create', [\App\Controllers\InvoiceController::class, 'store']);
+        ->get('/', [Controllers\HomeController::class, 'index'])
+        ->post('/upload', [Controllers\HomeController::class, 'upload'])
+        ->get('/invoices', [Controllers\InvoiceController::class, 'index'])
+        ->get('/invoices/create', [Controllers\InvoiceController::class, 'create'])
+        ->post('/invoices/create', [Controllers\InvoiceController::class, 'store']);
 
 
 (new App(
