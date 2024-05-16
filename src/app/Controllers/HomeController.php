@@ -3,8 +3,6 @@
 declare(strict_types=1);
 namespace App\Controllers;
 
-use App\App;
-use App\Container;
 use App\Models\Invoice;
 use App\Models\SignUp;
 use App\Models\User;
