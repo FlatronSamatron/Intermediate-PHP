@@ -19,7 +19,8 @@ $router
         ->post('/upload', [Controllers\HomeController::class, 'upload'])
         ->get('/invoices', [Controllers\InvoiceController::class, 'index'])
         ->get('/invoices/create', [Controllers\InvoiceController::class, 'create'])
-        ->post('/invoices/create', [Controllers\InvoiceController::class, 'store']);
+        ->post('/invoices/create', [Controllers\InvoiceController::class, 'store'])
+        ->get('/examples/generator', [Controllers\GeneratorExampleController::class, 'index']);
 
 
 (new App(
