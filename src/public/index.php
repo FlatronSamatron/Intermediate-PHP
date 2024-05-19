@@ -22,6 +22,11 @@ $router
         ->post('/invoices/create', [Controllers\InvoiceController::class, 'store'])
         ->get('/examples/generator', [Controllers\GeneratorExampleController::class, 'index']);
 
+echo '<ul>';
+foreach ($router->paths() as $path) {
+    echo "<li><a href={$path}>$path</a></li>";
+}
+echo '</ul>';
 
 (new App(
         $router,
@@ -29,6 +34,10 @@ $router
         new Config($_ENV),
         $container
 ))->run();
+
+
+
+
 
 
 

@@ -8,6 +8,7 @@ use App\Exceptions\RouteNotFoundException;
 class Router
 {
     private array $routes = [];
+    private array $paths = [];
 
     public function __construct(private Container $container)
     {
@@ -58,8 +59,14 @@ class Router
         return $this->routes;
     }
 
+    public function paths(): array
+    {
+        return $this->paths;
+    }
+
     public function get(string $route, callable|array $action): self
     {
+        $this->paths[] = $route;
         $this->register('GET', $route, $action);
 
         return $this;
