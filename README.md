@@ -1041,7 +1041,7 @@ CREATE TABLE invoices (
 
 ---
 
-- [3.9 - New In PHP 8.1](https://www.youtube.com/watch?v=cO6i_4n2iwA)
+- [3.9 - Covariance & Contravariance](https://www.youtube.com/watch?v=AgSrOI7N-fU)
 
     - В видео рассматриваются ковариантность и контравариантность в PHP. Ковариантность позволяет переопределять методы
       с
